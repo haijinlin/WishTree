@@ -1,0 +1,19 @@
+{
+  "name": "Derick's WishTree",
+  "short_name": "WishTree",
+  "description": "A family wish tree made for Derick.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#dff2ff",
+  "theme_color": "#143866",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

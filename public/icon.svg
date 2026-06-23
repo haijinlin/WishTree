@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Derick's WishTree icon">
+  <rect width="512" height="512" rx="96" fill="#dff2ff"/>
+  <circle cx="256" cy="235" r="142" fill="#31b46b"/>
+  <path d="M234 290h44l20 122h-84z" fill="#9a612d"/>
+  <path d="m256 83 28 86 90 1-72 53 27 87-73-52-73 52 27-87-72-53 90-1z" fill="#ffd45c" stroke="#143866" stroke-width="18" stroke-linejoin="round"/>
+</svg>
