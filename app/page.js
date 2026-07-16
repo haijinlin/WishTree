@@ -32,7 +32,7 @@ const categoryIcon = Object.fromEntries(
 );
 
 const roleLabel = {
-  derick: "Derick",
+  derick: "Emma",
   grownup: "Parent",
 };
 
@@ -105,7 +105,8 @@ export default async function Home({ searchParams }) {
   const session = await getSession();
   const isCreator = canCreate(session);
   const isManager = canManage(session);
-  const hasDatabase = Boolean(process.env.DATABASE_URL);
+  const screenshotMode = process.env.VERCEL !== "1" && process.env.SCREENSHOT_MODE === "true";
+  const hasDatabase = Boolean(process.env.DATABASE_URL) && !screenshotMode;
   const { wishes, isDemo } = await getWishes(hasDatabase);
 
   const grantedCount = wishes.filter((wish) => wish.status === "GRANTED").length;
@@ -126,10 +127,10 @@ export default async function Home({ searchParams }) {
           <p className="eyebrow">Every wish starts as a seed.</p>
           <h1>
             <span className="logoMark">{"\u2B50"}</span>
-            Derick's WishTree
+            {screenshotMode ? "Emma's WishTree" : "Derick's WishTree"}
           </h1>
           <p className="intro">
-            Derick plants the wishes. Parents can reply, set a quest, and turn
+            {screenshotMode ? "Emma" : "Derick"} plants the wishes. Parents can reply, set a quest, and turn
             granted wishes into real plans.
           </p>
         </div>
@@ -230,7 +231,7 @@ export default async function Home({ searchParams }) {
         </section>
       ) : null}
 
-      {isDemo ? (
+      {isDemo && !screenshotMode ? (
         <p className="globalNotice">
           Demo mode: the database is not connected, so changes will not be saved.
         </p>
@@ -244,6 +245,8 @@ export default async function Home({ searchParams }) {
         isManager={isManager}
         updateWish={updateWish}
         deleteWish={deleteWish}
+        initialFilter={screenshotMode ? params?.filter || "ALL" : "ALL"}
+        expandManager={screenshotMode && params?.manage === "true"}
       />
     </main>
   );

@@ -50,6 +50,7 @@ export async function logout() {
 }
 
 export async function createWish(formData) {
+  if (process.env.VERCEL !== "1" && process.env.SCREENSHOT_MODE === "true") return;
   const session = await getSession();
   if (!canCreate(session)) return;
   if (!process.env.DATABASE_URL) return;
@@ -69,6 +70,7 @@ export async function createWish(formData) {
 }
 
 export async function updateWish(formData) {
+  if (process.env.VERCEL !== "1" && process.env.SCREENSHOT_MODE === "true") return;
   const session = await getSession();
   if (!canManage(session)) return;
   if (!process.env.DATABASE_URL) return;
@@ -92,6 +94,7 @@ export async function updateWish(formData) {
 }
 
 export async function deleteWish(formData) {
+  if (process.env.VERCEL !== "1" && process.env.SCREENSHOT_MODE === "true") return;
   const session = await getSession();
   if (!canManage(session)) return;
   if (!process.env.DATABASE_URL) return;

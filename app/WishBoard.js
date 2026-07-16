@@ -72,8 +72,10 @@ export default function WishBoard({
   isManager,
   updateWish,
   deleteWish,
+  initialFilter = "ALL",
+  expandManager = false,
 }) {
-  const [activeFilter, setActiveFilter] = useState("ALL");
+  const [activeFilter, setActiveFilter] = useState(initialFilter);
   const [statusDrafts, setStatusDrafts] = useState(() =>
     Object.fromEntries(wishes.map((wish) => [wish.id, wish.status]))
   );
@@ -107,7 +109,7 @@ export default function WishBoard({
             <p>{emptyMessage}</p>
           </div>
         ) : (
-          visibleWishes.map((wish) => {
+          visibleWishes.map((wish, index) => {
             const selectedStatus = statusDrafts[wish.id] || wish.status;
             const isGranted = selectedStatus === "GRANTED";
 
@@ -150,7 +152,7 @@ export default function WishBoard({
                 </p>
 
                 {isManager ? (
-                  <details className="managePanel">
+                  <details className="managePanel" open={expandManager && index === 0}>
                     <summary>Manage</summary>
                     <form action={updateWish} className="replyForm">
                       <input type="hidden" name="id" value={wish.id} />
